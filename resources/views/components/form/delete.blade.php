@@ -1,5 +1,5 @@
 <form action="{{ route($route, $id) }}" method="POST">
     @csrf
-    @method('PUT')
+    @method('DELETE')
     {{ $slot }}
 </form>
