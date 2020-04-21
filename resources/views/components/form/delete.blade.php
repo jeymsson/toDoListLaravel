@@ -2,6 +2,6 @@
     @csrf
     @method('DELETE')
 
-    @component('components.form.submit', [ 'value' => $slot ])
+    @component('components.form.submit', [ 'value' => $slot, 'style' => $style ?? null ])
     @endcomponent
 </form>

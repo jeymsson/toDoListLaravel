@@ -1,1 +1,1 @@
-<input type="submit" value="{{ $value }}">
+<input class="btn {{ $style ?? 'btn-primary' }}" type="submit" value="{{ $value }}">
