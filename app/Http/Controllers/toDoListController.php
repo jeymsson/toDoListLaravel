@@ -64,7 +64,8 @@ class toDoListController extends Controller
     public function index()
     {
         $base = session($this->table);
-        return view('toDoList.index', compact(['base']))
+        $tabela = array('Id', 'Tarefa', 'Exibir', 'Editar', 'Remover');
+        return view('toDoList.index', compact(['base', 'tabela']))
             ->with('title', 'Lista de Tarefas');
     }
 
