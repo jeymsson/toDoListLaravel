@@ -2,7 +2,7 @@
 @section('title', $title)
 <h2>{{ $title }}</h2>
 @section('content')
-@component('components.form.a_link', ['route' => 'toDoList.create'])
+@component('components.form.a_button', ['route' => 'toDoList.create'])
     Novo registro
 @endcomponent
 
@@ -15,13 +15,17 @@
                 @rel_td(['td' => $item['id']])  @endrel_td
                 @rel_td(['td' => $item['task']])  @endrel_td
                 @rel_td()
-                    <a href="{{ route('toDoList.show', $item['id']) }}">Exibir</a>
+                    @component('components.form.a_button', ['route' => 'toDoList.show', 'id' => $item['id'], 'style' => 'btn-info'])
+                        Exibir
+                    @endcomponent
                 @endrel_td
                 @rel_td()
-                    <a href="{{ route('toDoList.edit', $item['id']) }}">Editar</a>
+                    @component('components.form.a_button', ['route' => 'toDoList.edit', 'id' => $item['id'], 'style' => 'btn-warning'])
+                        Editar
+                    @endcomponent
                 @endrel_td
                 @rel_td()
-                    @component('components.form.delete', ['route' => 'toDoList.destroy', 'id' => $item['id']])
+                    @component('components.form.delete', ['route' => 'toDoList.destroy', 'id' => $item['id'], 'style' => 'btn-danger'])
                         Remover
                     @endcomponent
                 @endrel_td
