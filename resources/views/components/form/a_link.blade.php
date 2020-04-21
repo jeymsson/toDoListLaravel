@@ -1,1 +1,1 @@
-<a href="{{ route( $route ) }}">Voltar</a>
+<a href="{{ route( $route ) }}">{{ $slot }}</a>
