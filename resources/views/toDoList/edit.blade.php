@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- {{ dd($route) }} --}}
-    @component('components.form.update', ['route' => $route, 'id' => '1'])
+    @component('components.form.update', ['route' => $route, 'id' => $id])
         @component('components.form.text', [
             'label' => 'Tarefa',
             'id' => 'task',

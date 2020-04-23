@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Task;
 
 class toDoListController extends Controller
 {
@@ -21,41 +22,6 @@ class toDoListController extends Controller
         }
     }
 
-    function buscarId($id, $pos = false)
-    {
-        $base = session($this->table);
-        $t = !$pos && isset($base[$id - 1]['id']) ? true : false;
-        if ($t && $id == ($base[$id - 1]['id'])) {
-            $base = $base[$id - 1];
-        } else {
-            foreach ($base as $k => $b) {
-                if ($b['id'] == $id) {
-                    if ($pos) {
-                        $base = $k;
-                    } else {
-                        $base = $b;
-                    }
-                    break;
-                }
-                $base = null;
-            }
-        }
-        return $base;
-    }
-    function maxId()
-    {
-        $base = session($this->table);
-        $max = 0;
-        if (count($base) > 0) {
-            foreach ($base as $b) {
-                if ($b['id'] > $max) {
-                    $max = $b['id'];
-                }
-            }
-        }
-        return $max;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -63,7 +29,7 @@ class toDoListController extends Controller
      */
     public function index()
     {
-        $base = session($this->table);
+        $base = Task::all();
         $tabela = array('Id', 'Tarefa', 'Exibir', 'Editar', 'Remover');
         return view('toDoList.index', compact(['base', 'tabela']))
             ->with('title', 'Lista de Tarefas');
@@ -90,12 +56,9 @@ class toDoListController extends Controller
      */
     public function store(Request $request)
     {
-        $base = session($this->table);
-        $r = $request->all();
-        $id = $this->maxId() + 1;
-        $task = $r['task'];
-        $base[] = ['id' => $id, 'task' => $task];
-        session([$this->table => $base]);
+        $task = new Task();
+        $task->task = $request->input('task');
+        $task->save();
         return $this->index();
     }
 
@@ -107,7 +70,8 @@ class toDoListController extends Controller
      */
     public function show($id)
     {
-        $row = $this->buscarId($id);
+        // $row = $this->buscarId($id);
+        $row = Task::find($id);
         return view('toDoList.show', compact(['row']))
             ->with('btn_back', 'toDoList.index')
             ->with('title', 'Tarefa ' . $id);
@@ -121,8 +85,8 @@ class toDoListController extends Controller
      */
     public function edit($id)
     {
-        $row = $this->buscarId($id);
-        return view('toDoList.edit', compact(['row']))
+        $row = Task::find($id);
+        return view('toDoList.edit', compact(['row', 'id']))
             ->with('btn_back', 'toDoList.index')
             ->with('route', 'toDoList.update')
             ->with('title', 'Editar: ' . $id);
@@ -137,11 +101,11 @@ class toDoListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $base = session($this->table);
-        $r = $request->all();
-        $pos = $this->buscarId($id, true);
-        $base[$pos]['task'] = $r['task'];
-        session([$this->table => $base]);
+        $row = Task::find($id);
+        if (isset($row)) {
+            $row->task = $request->input('task');
+            $row->save();
+        }
         return $this->index();
     }
 
@@ -153,10 +117,7 @@ class toDoListController extends Controller
      */
     public function destroy($id)
     {
-        $pos = $this->buscarId($id, true);
-        $base = session($this->table);
-        unset($base[$pos]);
-        session([$this->table => $base]);
+        Task::find($id)->delete();
         return $this->index();
     }
 }
