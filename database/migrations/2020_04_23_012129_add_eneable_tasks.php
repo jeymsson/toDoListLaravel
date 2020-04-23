@@ -15,6 +15,7 @@ class AddEneableTasks extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->tinyInteger('eneabled')->default(1)->after('task');
+            // $table->foreign('eneabled')->references('table')->on('column');
         });
     }
 
