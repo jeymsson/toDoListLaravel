@@ -1,7 +1,7 @@
 @extends('layouts.index')
 @section('title', $title)
 @section('content')
-    @component('components.form.card', ['route' => 'toDoList.create', 'title'=>$title])
+    @component('components.form.card', ['title'=>$title])
         @component('components.form.a_button', ['route' => 'toDoList.create'])
             Novo registro
         @endcomponent
