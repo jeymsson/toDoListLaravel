@@ -23,7 +23,12 @@ class toDoListController extends Controller
         $base = Task::all();
         $tabela = array('Id', 'Tarefa', 'Exibir', 'Editar', 'Remover');
         return view('toDoList.index', compact(['base', 'tabela']))
-            ->with('title', 'Lista de Tarefas');
+            ->with('title', 'Lista de Tarefas')
+
+            ->with('route_create', 'toDoList.create')
+            ->with('route_show', 'toDoList.show')
+            ->with('route_edit', 'toDoList.edit')
+            ->with('route_delete', 'toDoList.destroy');
     }
 
     /**
