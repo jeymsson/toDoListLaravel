@@ -10,6 +10,7 @@
 <body>
     @component('components.navbar', ['menu' => array(
         array('name'=>'Lista de tarefas', 'route'=>'toDoList.index'),
+        array('name'=>'Clientes', 'route'=>'client.index'),
     )])
     @endcomponent
     @yield('content')
