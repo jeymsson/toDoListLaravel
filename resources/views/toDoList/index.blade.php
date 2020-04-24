@@ -1,13 +1,16 @@
 @extends('layouts.index')
 @section('title', $title)
-<h2>{{ $title }}</h2>
 @section('content')
+<div class="card border" style="margin: 10px;">
+<div class="card-body">
+<h2 class="card-title">{{ $title }}</h2>
+
 @component('components.form.a_button', ['route' => 'toDoList.create'])
     Novo registro
 @endcomponent
 
 @if (count($base) > 0)
-    @component('components.rel.table', ['head' => $tabela])
+    @component('components.rel.table', ['head' => $tabela, 'class'=> 'table-dark'])
         @foreach ($base as $item)
             @isset($item['task'])
 
@@ -36,4 +39,6 @@
 @else
     <h4>Nenhum registro encontrado.</h4>
 @endif
+</div>
+</div>
 @endsection

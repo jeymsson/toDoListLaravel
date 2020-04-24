@@ -7,19 +7,10 @@ use App\Task;
 
 class toDoListController extends Controller
 {
-    private $toDoList = [];
-    private $maxId = '';
     private $route = '';
-    private $table = '';
-
     function __construct()
     {
         $this->route = 'toDoList';
-        $this->table = 'toDoList';
-        $base = session($this->table);
-        if (!isset($base)) {
-            session([$this->table => $this->toDoList]);
-        }
     }
 
     /**

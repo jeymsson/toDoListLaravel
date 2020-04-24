@@ -1,10 +1,12 @@
 @extends('layouts.index')
 
 @section('title', $title)
-<h2>{{ $title }}</h2>
 @section('content')
 
-    {{-- {{ dd($route) }} --}}
+<div class="card border" style="margin: 10px;">
+<div class="card-body">
+<h2 class="card-title">{{ $title }}</h2>
+
     @component('components.form.update', ['route' => $route, 'id' => $id])
         @component('components.form.text', [
             'label' => 'Tarefa',
@@ -18,4 +20,6 @@
         @component('components.form.back', [ 'route' => $btn_back ])
         @endcomponent
     @endcomponent
+</div>
+</div>
 @endsection
