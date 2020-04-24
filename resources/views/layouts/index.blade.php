@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
+    @component('components.navbar', ['menu' => array(
+        array('name'=>'Lista de tarefas', 'route'=>'toDoList.index'),
+    )])
+    @endcomponent
     @yield('content')
 </body>
 </html>
