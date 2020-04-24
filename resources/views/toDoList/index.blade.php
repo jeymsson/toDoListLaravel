@@ -2,7 +2,7 @@
 @section('title', $title)
 @section('content')
     @component('components.form.card', ['title'=>$title])
-        @component('components.form.a_button', ['route' => 'toDoList.create'])
+        @component('components.form.a_button', ['route' => $route_create])
             Novo registro
         @endcomponent
 
@@ -15,17 +15,17 @@
                         @rel_td(['td' => $item['id']])  @endrel_td
                         @rel_td(['td' => $item['task']])  @endrel_td
                         @rel_td()
-                            @component('components.form.a_button', ['route' => 'toDoList.show', 'id' => $item['id'], 'style' => 'btn-info'])
+                            @component('components.form.a_button', ['route' => $route_show, 'id' => $item['id'], 'style' => 'btn-info'])
                                 Exibir
                             @endcomponent
                         @endrel_td
                         @rel_td()
-                            @component('components.form.a_button', ['route' => 'toDoList.edit', 'id' => $item['id'], 'style' => 'btn-warning'])
+                            @component('components.form.a_button', ['route' => $route_edit, 'id' => $item['id'], 'style' => 'btn-warning'])
                                 Editar
                             @endcomponent
                         @endrel_td
                         @rel_td()
-                            @component('components.form.delete', ['route' => 'toDoList.destroy', 'id' => $item['id'], 'style' => 'btn-danger'])
+                            @component('components.form.delete', ['route' => $route_delete, 'id' => $item['id'], 'style' => 'btn-danger'])
                                 Remover
                             @endcomponent
                         @endrel_td

@@ -3,7 +3,7 @@
 @section('title', $title)
 @section('content')
     @component('components.form.card', ['title'=>$title])
-        @component('components.form.post', ['route' => 'toDoList.index'])
+        @component('components.form.post', ['route' => $route])
             @component('components.form.text', [
                 'label' => 'Tarefa',
                 'id' => 'task',
