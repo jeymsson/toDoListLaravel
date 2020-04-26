@@ -37,6 +37,9 @@ class ClientController extends Controller
      */
     public function create()
     {
+        if (isset($errors)) {
+            echo var_dump($errors);
+        }
         return view('client.create')
             ->with('route', 'client.store')
             ->with('title', 'Cadastrar cliente')
@@ -51,6 +54,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(['nome' => 'required|min:3|max:40|unique:clients']);
         $task = new Client();
         $task->nome = $request->input('nome');
         $task->save();

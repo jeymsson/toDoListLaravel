@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
+    {{--  // Menu  --}}
     @component('components.navbar', ['menu' => array(
         array('name'=>'Lista de tarefas', 'route'=>'toDoList.index'),
-        array('name'=>'Clientes', 'route'=>'client.index'),
-    )])
+        array('name'=>'Clientes', 'route'=>'client.index'),)])
     @endcomponent
+    {{--  // Error logs  --}}
+    @if ($errors->any())
+        @foreach ($errors->all() as $k => $e)
+            @component('components.rel.alert') {{ $e }} @endcomponent
+        @endforeach
+    @endif
+    {{--  // Contents  --}}
     @yield('content')
 </body>
 </html>
