@@ -99,7 +99,7 @@ class ClientController extends Controller
             'Email' => $row['email']
         );
         $current = $this->current;
-        return view('client.show', compact(['base', 'current']))
+        return view('layouts.show', compact(['base', 'current']))
             ->with('btn_back', 'client.index')
             ->with('title', 'Cliente ' . $id);
     }
