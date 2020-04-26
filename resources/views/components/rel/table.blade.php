@@ -1,4 +1,4 @@
-<table class="table table-hover {{ $class ?? null }}">
+<table class="table table-bordered table-hover {{ $class ?? null }}">
     <thead>
     <tr>
     @foreach ($head as $td)
