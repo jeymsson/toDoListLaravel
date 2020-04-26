@@ -21,7 +21,7 @@ class ClientController extends Controller
     public function index()
     {
         $base = Client::all();
-        $tabela = array('Id', 'Tarefa', 'Exibir', 'Editar', 'Remover');
+        $tabela = array('Id', 'Cliente', 'Idade', 'Endereço', 'Email', 'Exibir', 'Editar', 'Remover');
         return view('client.index', compact(['base', 'tabela']))
             ->with('title', 'Lista de Clientes')
             ->with('route_create', 'client.create')
@@ -37,9 +37,6 @@ class ClientController extends Controller
      */
     public function create()
     {
-        if (isset($errors)) {
-            echo var_dump($errors);
-        }
         return view('client.create')
             ->with('route', 'client.store')
             ->with('title', 'Cadastrar cliente')
@@ -54,9 +51,30 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['nome' => 'required|min:3|max:40|unique:clients']);
+        /*$request->validate([
+            'nome' => 'required|min:3|max:40|unique:clients',
+            'idade' => 'required',
+            'endereco' => 'required',
+            'email' => 'required|email',
+        ]);*/
+        $regras = [
+            'nome' => 'required|min:3|max:40|unique:clients',
+            'idade' => 'required',
+            'endereco' => 'required',
+            'email' => 'required|email',
+        ];
+        $msgm = [
+            'nome.required' => 'O campo Nome é obrigatório.',
+            'idade.required' => 'O campo idade é obrigatório.',
+            'endereco.required' => 'O campo Endereco é obrigatório.',
+            'email.required' => 'O campo email é obrigatório.',
+        ];
+        $request->validate($regras, $msgm);
         $task = new Client();
         $task->nome = $request->input('nome');
+        $task->idade = $request->input('idade');
+        $task->endereco = $request->input('endereco');
+        $task->email = $request->input('email');
         $task->save();
         return $this->index();
     }
@@ -85,6 +103,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         $row = Client::find($id);
+        // dd($row->toArray());
         return view('client.edit', compact(['row', 'id']))
             ->with('btn_back', 'client.index')
             ->with('route', 'client.update')
@@ -100,9 +119,25 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $regras = [
+            'nome' => 'min:3|max:40|unique:clients',
+            'idade' => 'required',
+            'endereco' => 'required',
+            'email' => 'required|email',
+        ];
+        $msgm = [
+            'nome.required' => 'O campo Nome é obrigatório.',
+            'idade.required' => 'O campo idade é obrigatório.',
+            'endereco.required' => 'O campo Endereco é obrigatório.',
+            'email.required' => 'O campo email é obrigatório.',
+        ];
+        $request->validate($regras, $msgm);
         $row = Client::find($id);
         if (isset($row)) {
             $row->nome = $request->input('nome');
+            $row->idade = $request->input('idade');
+            $row->endereco = $request->input('endereco');
+            $row->email = $request->input('email');
             $row->save();
         }
         return $this->index();
