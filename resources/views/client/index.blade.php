@@ -37,7 +37,9 @@
                 @endforeach
             @endcomponent
         @else
-            <h4>Nenhum registro encontrado.</h4>
+            @component('components.form.card')
+                <h4>Nenhum registro encontrado.</h4>
+            @endcomponent
         @endif
     @endcomponent
 @endsection
