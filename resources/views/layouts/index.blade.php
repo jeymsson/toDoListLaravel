@@ -13,7 +13,9 @@
         'current' => ($current ?? null),
         'menu' => array(
             array('name'=>'Lista de tarefas', 'route'=>'toDoList.index'),
-            array('name'=>'Clientes', 'route'=>'client.index'),)])
+            array('name'=>'Clientes', 'route'=>'client.index'),
+            array('name'=>'Produtos', 'route'=>'product.index'),
+        )])
     @endcomponent
     {{--  // Error logs  --}}
     {{--  @if ($errors->any())
