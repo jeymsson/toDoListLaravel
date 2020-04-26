@@ -120,7 +120,7 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $regras = [
-            'nome' => 'min:3|max:40|unique:clients',
+            'nome' => 'required|min:3|max:40',
             'idade' => 'required',
             'endereco' => 'required',
             'email' => 'required|email',
