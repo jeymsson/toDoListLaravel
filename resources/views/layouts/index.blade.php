@@ -14,11 +14,11 @@
         array('name'=>'Clientes', 'route'=>'client.index'),)])
     @endcomponent
     {{--  // Error logs  --}}
-    @if ($errors->any())
+    {{--  @if ($errors->any())
         @foreach ($errors->all() as $k => $e)
             @component('components.rel.alert') {{ $e }} @endcomponent
         @endforeach
-    @endif
+    @endif  --}}
     {{--  // Contents  --}}
     @yield('content')
 </body>
