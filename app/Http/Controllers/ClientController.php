@@ -90,9 +90,16 @@ class ClientController extends Controller
     public function show($id)
     {
         // $row = $this->buscarId($id);
-        $row = Client::find($id);
+        $row = Client::find($id)->toArray();
+        $base = array(
+            'Codigo' => $row['id'],
+            'Nome' => $row['nome'],
+            'Idade' => $row['idade'],
+            'Endereço' => $row['endereco'],
+            'Email' => $row['email']
+        );
         $current = $this->current;
-        return view('client.show', compact(['row', 'current']))
+        return view('client.show', compact(['base', 'current']))
             ->with('btn_back', 'client.index')
             ->with('title', 'Cliente ' . $id);
     }
