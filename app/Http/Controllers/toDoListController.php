@@ -7,10 +7,10 @@ use App\Task;
 
 class toDoListController extends Controller
 {
-    private $route = '';
+    private $current = '';
     function __construct()
     {
-        $this->route = 'toDoList';
+        $this->current = 'toDoList';
     }
 
     /**
@@ -22,7 +22,8 @@ class toDoListController extends Controller
     {
         $base = Task::all();
         $tabela = array('Id', 'Tarefa', 'Exibir', 'Editar', 'Remover');
-        return view('toDoList.index', compact(['base', 'tabela']))
+        $current = $this->current;
+        return view('toDoList.index', compact(['base', 'tabela', 'current']))
             ->with('title', 'Lista de Tarefas')
 
             ->with('route_create', 'toDoList.create')
@@ -38,7 +39,8 @@ class toDoListController extends Controller
      */
     public function create()
     {
-        return view('toDoList.create')
+        $current = $this->current;
+        return view('toDoList.create', compact(['current']))
             ->with('route', 'toDoList.store')
             ->with('title', 'Cadastrar tarefa')
             ->with('btn_back', 'toDoList.index');
@@ -68,7 +70,8 @@ class toDoListController extends Controller
     {
         // $row = $this->buscarId($id);
         $row = Task::find($id);
-        return view('toDoList.show', compact(['row']))
+        $current = $this->current;
+        return view('toDoList.show', compact(['row', 'current']))
             ->with('btn_back', 'toDoList.index')
             ->with('title', 'Tarefa ' . $id);
     }
@@ -82,7 +85,8 @@ class toDoListController extends Controller
     public function edit($id)
     {
         $row = Task::find($id);
-        return view('toDoList.edit', compact(['row', 'id']))
+        $current = $this->current;
+        return view('toDoList.edit', compact(['row', 'id', 'current']))
             ->with('btn_back', 'toDoList.index')
             ->with('route', 'toDoList.update')
             ->with('title', 'Editar: ' . $id);
