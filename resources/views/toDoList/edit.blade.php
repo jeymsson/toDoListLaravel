@@ -3,7 +3,7 @@
 @section('title', $title)
 @section('content')
     @component('components.form.card', ['title'=>$title])
-        @component('components.form.update', ['route' => $route, 'id' => $id])
+        @component('components.form.put', ['route' => $route, 'id' => $id])
             @component('components.form.text', [
                 'label' => 'Tarefa',
                 'id' => 'task',
