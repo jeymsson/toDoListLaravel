@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    private $route = '';
+    private $current = '';
     function __construct()
     {
-        $this->route = 'client';
+        $this->current = 'client';
     }
 
     /**
@@ -22,7 +22,8 @@ class ClientController extends Controller
     {
         $base = Client::all();
         $tabela = array('Id', 'Cliente', 'Idade', 'Endereço', 'Email', 'Exibir', 'Editar', 'Remover');
-        return view('client.index', compact(['base', 'tabela']))
+        $current = $this->current;
+        return view('client.index', compact(['base', 'tabela', 'current']))
             ->with('title', 'Lista de Clientes')
             ->with('route_create', 'client.create')
             ->with('route_show', 'client.show')
@@ -37,7 +38,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('client.create')
+        $current = $this->current;
+        return view('client.create', compact(['current']))
             ->with('route', 'client.store')
             ->with('title', 'Cadastrar cliente')
             ->with('btn_back', 'client.index');
@@ -89,7 +91,8 @@ class ClientController extends Controller
     {
         // $row = $this->buscarId($id);
         $row = Client::find($id);
-        return view('client.show', compact(['row']))
+        $current = $this->current;
+        return view('client.show', compact(['row', 'current']))
             ->with('btn_back', 'client.index')
             ->with('title', 'Cliente ' . $id);
     }
@@ -103,8 +106,8 @@ class ClientController extends Controller
     public function edit($id)
     {
         $row = Client::find($id);
-        // dd($row->toArray());
-        return view('client.edit', compact(['row', 'id']))
+        $current = $this->current;
+        return view('client.edit', compact(['row', 'id', 'current']))
             ->with('btn_back', 'client.index')
             ->with('route', 'client.update')
             ->with('title', 'Editar: ' . $id);

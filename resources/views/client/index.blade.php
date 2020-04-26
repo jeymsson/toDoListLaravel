@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('layouts.index', ['current' => $current ?? null])
 @section('title', $title)
 @section('content')
     @component('components.form.card', ['title'=>$title])

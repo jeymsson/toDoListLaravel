@@ -9,9 +9,11 @@
 </head>
 <body>
     {{--  // Menu  --}}
-    @component('components.navbar', ['menu' => array(
-        array('name'=>'Lista de tarefas', 'route'=>'toDoList.index'),
-        array('name'=>'Clientes', 'route'=>'client.index'),)])
+    @component('components.navbar', [
+        'current' => ($current ?? null),
+        'menu' => array(
+            array('name'=>'Lista de tarefas', 'route'=>'toDoList.index'),
+            array('name'=>'Clientes', 'route'=>'client.index'),)])
     @endcomponent
     {{--  // Error logs  --}}
     {{--  @if ($errors->any())
