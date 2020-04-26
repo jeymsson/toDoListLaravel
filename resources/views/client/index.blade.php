@@ -40,5 +40,4 @@
             <h4>Nenhum registro encontrado.</h4>
         @endif
     @endcomponent
-
 @endsection
