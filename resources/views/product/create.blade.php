@@ -1,7 +1,8 @@
-@extends('layouts.index')
+{{--  @extends('layouts.index')  --}}
 
-@section('title', $title)
-@section('content')
+{{--  @section('title', $title)  --}}
+{{--  @section('content')  --}}
+@component('components.others.modal', ['id_modal'=> 'modal_create'])
     @component('components.form.create',
     ['title'=>$title,'route' => $route,'btn_back' => $btn_back])
         @component('components.form.text', [
@@ -26,5 +27,5 @@
             'back_text' => 'Digite o Departamento',])
         @endcomponent
     @endcomponent
-
-@endsection
+@endcomponent
+{{--  @endsection  --}}

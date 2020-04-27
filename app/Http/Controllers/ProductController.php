@@ -28,7 +28,8 @@ class ProductController extends Controller
             ->with('route_create', 'product.create')
             ->with('route_show', 'product.show')
             ->with('route_edit', 'product.edit')
-            ->with('route_delete', 'product.destroy');
+            ->with('route_delete', 'product.destroy')
+            . $this->create();
     }
 
     /**

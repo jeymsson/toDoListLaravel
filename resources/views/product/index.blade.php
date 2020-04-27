@@ -2,7 +2,7 @@
 @section('title', $title)
 @section('content')
     @component('components.form.card', ['title'=>$title])
-        @component('components.form.a_button', ['route' => $route_create])
+        @component('components.form.a_button', ['onclick' => "$('#modal_create').show(200)"])
             Novo registro
         @endcomponent
 
