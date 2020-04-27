@@ -13,8 +13,12 @@ class Products extends Migration
      */
     public function up()
     {
-        Schema::create('Products', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nome');
+            $table->integer('quantidade');
+            $table->float('preco', 7, 2);
+            $table->string('departamento');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class Products extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Products');
+        Schema::dropIfExists('products');
     }
 }
