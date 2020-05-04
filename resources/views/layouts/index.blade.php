@@ -18,13 +18,10 @@
             array('name'=>'Produtos', 'route'=>'product.index'),
         )])
     @endcomponent
-    {{--  // Error logs  --}}
-    {{--  @if ($errors->any())
-        @foreach ($errors->all() as $k => $e)
-            @component('components.rel.alert') {{ $e }} @endcomponent
-        @endforeach
-    @endif  --}}
-    {{--  // Contents  --}}
     @yield('content')
+    @hasSection ('javascript')
+        @yield('javascript')
+    @endif
+
 </body>
 </html>

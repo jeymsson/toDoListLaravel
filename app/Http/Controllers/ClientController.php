@@ -164,4 +164,29 @@ class ClientController extends Controller
         Client::find($id)->delete();
         return $this->index();
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index2json()
+    {
+        // $row = $this->buscarId($id);
+        $row = Client::all();
+        return json_encode($row);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show2json($id)
+    {
+        // $row = $this->buscarId($id);
+        $row = Client::find($id);
+        return json_encode($row);
+    }
 }

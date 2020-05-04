@@ -4,4 +4,4 @@
         @if (!isset($route)) # @else
             {{ route( $route, ($id ?? null) ) }}
         @endif
-    ">{{ $slot }}</a>
+    ">{{ $name ?? $slot }}</a>

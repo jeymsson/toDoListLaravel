@@ -1,10 +1,10 @@
 
 <div class="container">
     <div class="form-group row">
-        <div class=" col-sm-2">
+        <div class=" col-sm-4">
             <label for="{{ $id }}" class="input-group-text col-form-label">{{ $label }}</label>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             <input type="text"
                 name="{{ $id }}" id="{{ $id }}"
                 class="form-control {{ $errors->has($id) ? 'is-invalid' : '' }}"

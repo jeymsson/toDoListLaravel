@@ -20,16 +20,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $base = Product::all();
         $tabela = array('Id', 'Produto', 'Quantidade', 'Preco', 'Departamento', 'Exibir', 'Editar', 'Remover');
         $current = $this->current;
-        return view('product.index', compact(['base', 'tabela', 'current']))
+        return view('product.index', compact(['tabela', 'current']))
             ->with('title', 'Lista de Produtos')
             ->with('route_create', 'product.create')
             ->with('route_show', 'product.show')
             ->with('route_edit', 'product.edit')
             ->with('route_delete', 'product.destroy')
-            . $this->create();
+            . $this->create()
+            . $this->show();
     }
 
     /**
@@ -43,6 +43,8 @@ class ProductController extends Controller
         return view('product.create', compact(['current']))
             ->with('route', 'product.store')
             ->with('title', 'Cadastrar produto')
+            ->with('modal', 'modal_create')
+            ->with('onclick_back', '$("#modal_create").hide(250);')
             ->with('btn_back', 'product.index');
     }
 
@@ -66,7 +68,7 @@ class ProductController extends Controller
         $prod->preco = $request->input('preco');
         $prod->departamento = $request->input('departamento');
         $prod->save();
-        return $this->index();
+        return json_encode($prod);
     }
 
     /**
@@ -75,21 +77,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id = null)
     {
-        // $row = $this->buscarId($id);
-        $row = Product::find($id)->toArray();
-        $base = array(
-            'Codigo' => $row['id'],
-            'Nome' => $row['nome'],
-            'Quantidade' => $row['quantidade'],
-            'Preco' => $row['preco'],
-            'Departamento' => $row['departamento']
-        );
-        $current = $this->current;
-        return view('layouts.show', compact(['base', 'current']))
-            ->with('btn_back', 'product.index')
-            ->with('title', 'Produto ' . $id);
+        // $row = Product::find($id)->toArray();
+        return view('layouts.show')
+            ->with('modal', 'modal_show')
+            ->with('onclick_back', '$("#modal_show").hide(250);')
+            ->with('title', 'Produto ');
     }
 
     /**
@@ -117,12 +111,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nome' => 'required|min:3|max:40|unique:clients',
-            'quantidade' => 'required',
-            'preco' => 'required',
-            'departamento' => 'required',
-        ]);
         $row = Product::find($id);
         if (isset($row)) {
             $row->nome = $request->input('nome');
@@ -130,8 +118,10 @@ class ProductController extends Controller
             $row->preco = $request->input('preco');
             $row->departamento = $request->input('departamento');
             $row->save();
+            // return response('OK', 200);
+            return json_encode($row);
         }
-        return $this->index();
+        return response('Produto inexistente', 404);
     }
 
     /**
@@ -142,7 +132,36 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::find($id)->delete();
-        return $this->index();
+        $rel = Product::find($id);
+        if (isset($rel)) {
+            $rel->delete();
+            return response('OK', 200);
+        }
+        return response('Produto inexistente', 404);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index2json()
+    {
+        // $row = $this->buscarId($id);
+        $row = Product::all();
+        return json_encode($row);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show2json($id)
+    {
+        // $row = $this->buscarId($id);
+        $row = Product::find($id);
+        return json_encode($row);
     }
 }
