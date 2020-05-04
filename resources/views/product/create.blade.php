@@ -2,9 +2,11 @@
 
 {{--  @section('title', $title)  --}}
 {{--  @section('content')  --}}
-@component('components.others.modal', ['id_modal'=> 'modal_create'])
+@component('components.others.modal', ['id_modal'=> $modal])
     @component('components.form.create',
-    ['title'=>$title,'route' => $route,'btn_back' => $btn_back])
+    ['title'=>$title,'route' => $route,
+    'onclick_back' => $onclick_back,
+    'onclick_submit' => 'postProduto()'])
         @component('components.form.text', [
             'label' => 'Nome',
             'id' => 'nome',
