@@ -90,6 +90,7 @@
             show_exibition(d)
         });
     }
+    {{ $slot }}
     /*
         function show_exibition(d){
             return alert('show_exibition(): Necessario implementar.');

@@ -18,7 +18,7 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function _index()
     {
         $base = Client::all();
         $tabela = array('Id', 'Cliente', 'Idade', 'Endereço', 'Email', 'Exibir', 'Editar', 'Remover');
@@ -78,7 +78,8 @@ class ClientController extends Controller
         $task->endereco = $request->input('endereco');
         $task->email = $request->input('email');
         $task->save();
-        return $this->index();
+        return json_encode($task);
+        // return $this->index();
     }
 
     /**
@@ -149,7 +150,9 @@ class ClientController extends Controller
             $row->endereco = $request->input('endereco');
             $row->email = $request->input('email');
             $row->save();
+            return json_encode($row);
         }
+        return response('erro', 404);
         return $this->index();
     }
 
@@ -162,7 +165,8 @@ class ClientController extends Controller
     public function destroy($id)
     {
         Client::find($id)->delete();
-        return $this->index();
+        return response('OK', 200);
+        // return $this->index();
     }
 
     /**
@@ -188,5 +192,19 @@ class ClientController extends Controller
         // $row = $this->buscarId($id);
         $row = Client::find($id);
         return json_encode($row);
+    }
+
+    public function index()
+    {
+        $tabela = array('Id', 'Cliente', 'Idade', 'Endereço', 'Email', 'Exibir', 'Editar', 'Remover');
+        $current = $this->current;
+        return view('client.index_new', compact(['tabela', 'current']))
+            ->with('title', 'Lista de Clientes')
+            ->with('route', 'api/client/')
+            ->with('show_title', 'Cliente ')
+            ->with('show_modal', 'modal_show')
+            ->with('show_onclick_back', '$("#modal_show").hide(250);')
+            ->with('form_title', 'Cliente')
+            ->with('form_modal', 'modal_crud');
     }
 }

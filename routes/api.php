@@ -18,6 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('client', 'ClientController@index2json');
 Route::get('client/{id}', 'ClientController@show2json');
+
+Route::post('client', 'ClientController@store');
+Route::delete('client/{id}', 'ClientController@destroy');
+Route::put('client/{id}', 'ClientController@update');
+
 Route::get('product', 'ProductController@index2json');
 Route::get('product/{id}', 'ProductController@show2json');
 Route::post('product', 'ProductController@store');
