@@ -24,12 +24,12 @@ class ProductController extends Controller
         $current = $this->current;
         return view('product.index', compact(['tabela', 'current']))
             ->with('title', 'Lista de Produtos')
-            ->with('route_create', 'product.create')
-            ->with('route_show', 'product.show')
-            ->with('route_edit', 'product.edit')
-            ->with('route_delete', 'product.destroy')
-            . $this->create()
-            . $this->show();
+            ->with('route', 'api/product/')
+            ->with('show_title', 'Produto ')
+            ->with('show_modal', 'modal_show')
+            ->with('show_onclick_back', '$("#modal_show").hide(250);')
+            ->with('form_title', 'Cadastrar produto')
+            ->with('form_modal', 'modal_crud');
     }
 
     /**
@@ -39,13 +39,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $current = $this->current;
-        return view('product.create', compact(['current']))
-            ->with('route', 'product.store')
-            ->with('title', 'Cadastrar produto')
-            ->with('modal', 'modal_create')
-            ->with('onclick_back', '$("#modal_create").hide(250);')
-            ->with('btn_back', 'product.index');
     }
 
     /**
@@ -81,9 +74,7 @@ class ProductController extends Controller
     {
         // $row = Product::find($id)->toArray();
         return view('layouts.show')
-            ->with('modal', 'modal_show')
-            ->with('onclick_back', '$("#modal_show").hide(250);')
-            ->with('title', 'Produto ');
+            ->with('show_onclick_back', '$("#modal_show").hide(250);');
     }
 
     /**
@@ -94,12 +85,6 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $row = Product::find($id);
-        $current = $this->current;
-        return view('product.edit', compact(['row', 'id', 'current']))
-            ->with('btn_back', 'product.index')
-            ->with('route', 'product.update')
-            ->with('title', 'Editar: ' . $id);
     }
 
     /**
