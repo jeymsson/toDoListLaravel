@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+use App\Task_Group;
 
 class toDoListController extends Controller
 {
@@ -21,11 +22,10 @@ class toDoListController extends Controller
     public function index()
     {
         $base = Task::all();
-        $tabela = array('Id', 'Tarefa', 'Exibir', 'Editar', 'Remover');
+        $tabela = array('Id', 'Tarefa', 'Grupo', 'Exibir', 'Editar', 'Remover');
         $current = $this->current;
         return view('toDoList.index', compact(['base', 'tabela', 'current']))
             ->with('title', 'Lista de Tarefas')
-
             ->with('route_create', 'toDoList.create')
             ->with('route_show', 'toDoList.show')
             ->with('route_edit', 'toDoList.edit')
@@ -85,11 +85,22 @@ class toDoListController extends Controller
     public function edit($id)
     {
         $row = Task::find($id);
+        $group = Task_Group::all()
+            ->map
+            ->only(['id', 'name'])
+            ->toArray();
+
+        $array_grupo = array();
+        foreach ($group as $v) {
+            $array_grupo[] = ['cod' => $v['id'], 'des' => $v['name']];
+        }
+
         $current = $this->current;
         return view('toDoList.edit', compact(['row', 'id', 'current']))
             ->with('btn_back', 'toDoList.index')
             ->with('route', 'toDoList.update')
-            ->with('title', 'Editar: ' . $id);
+            ->with('title', 'Editar: ' . $id)
+            ->with('array_grupo', $array_grupo);
     }
 
     /**
@@ -104,6 +115,7 @@ class toDoListController extends Controller
         $row = Task::find($id);
         if (isset($row)) {
             $row->task = $request->input('task');
+            $row->group_id = $request->input('grupo');
             $row->save();
         }
         return $this->index();

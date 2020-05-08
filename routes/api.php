@@ -28,3 +28,9 @@ Route::get('product/{id}', 'ProductController@show2json');
 Route::post('product', 'ProductController@store');
 Route::delete('product/{id}', 'ProductController@destroy');
 Route::put('product/{id}', 'ProductController@update');
+
+Route::get('group_task', 'GrouptaskController@index2json');
+Route::get('group_task/{id}', 'GrouptaskController@show2json');
+Route::post('group_task', 'GrouptaskController@store');
+Route::delete('group_task/{id}', 'GrouptaskController@destroy');
+Route::put('group_task/{id}', 'GrouptaskController@update');

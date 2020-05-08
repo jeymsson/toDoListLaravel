@@ -7,7 +7,9 @@
         <div class="col-sm-8">
             <select name="{{$id ?? null}}" id="{{$id ?? null}}" class="form-control {{$class??null}}">
                 @isset($array) @foreach ($array as $i)
-                    <option value="{{$i['cod']}}">{{$i['des']}}</option>
+                    <option value="{{$i['cod']}}"
+                    @if ($i['cod'] == ($value ?? null)) selected @endif
+                    >{{$i['des']}}</option>
                 @endforeach @endisset
             </select>
         </div>

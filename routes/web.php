@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::resource('toDoList', 'toDoListController');
 Route::resource('client', 'ClientController');
 Route::resource('product', 'ProductController');
+Route::resource('group_task', 'GrouptaskController');

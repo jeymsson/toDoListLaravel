@@ -14,6 +14,7 @@
                     <tr>
                         @rel_td(['td' => $item['id']])  @endrel_td
                         @rel_td(['td' => $item['task']])  @endrel_td
+                        @rel_td(['td' => $item['group_id']])  @endrel_td
                         @rel_td()
                             @component('components.form.a_button', ['route' => $route_show, 'id' => $item['id'], 'style' => 'btn-info'])
                                 Exibir

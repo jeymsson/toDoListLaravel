@@ -10,6 +10,13 @@
                 'value' => $row['task'],
             ])
             @endcomponent
+            @component('components.form.select', [
+                'label' => 'Grupo',
+                'id' => 'grupo',
+                'value' => $row['group_id'],
+                'array' => $array_grupo,
+            ])
+            @endcomponent
             @component('components.form.submit', [ 'value' => 'Editar' ])
             @endcomponent
             <br>
