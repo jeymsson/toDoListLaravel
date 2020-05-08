@@ -17,6 +17,7 @@
             array('name'=>'Grupos de tarefa', 'route'=>'group_task.index'),
             array('name'=>'Clientes', 'route'=>'client.index'),
             array('name'=>'Produtos', 'route'=>'product.index'),
+            array('name'=>'Países', 'route'=>'country.index'),
         )])
     @endcomponent
     @yield('content')
