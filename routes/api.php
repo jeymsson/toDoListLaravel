@@ -34,3 +34,6 @@ Route::get('group_task/{id}', 'GrouptaskController@show2json');
 Route::post('group_task', 'GrouptaskController@store');
 Route::delete('group_task/{id}', 'GrouptaskController@destroy');
 Route::put('group_task/{id}', 'GrouptaskController@update');
+
+
+Route::resource('country', 'CountryController');

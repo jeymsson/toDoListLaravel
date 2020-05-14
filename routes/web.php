@@ -19,3 +19,7 @@ Route::resource('client', 'ClientController');
 Route::resource('product', 'ProductController');
 Route::resource('group_task', 'GrouptaskController');
 Route::resource('country', 'CountryController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
